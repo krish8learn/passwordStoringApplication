@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/krish8learn/passwordStoringApplication/dto"
 )
 
@@ -26,15 +27,30 @@ func SavePassword(w http.ResponseWriter, r *http.Request) {
 	}
 	DbData, DbErr := dto.CreateEmail(email.EmailID, email.DomainName, email.Password, email.Reason)
 	if DbErr != nil {
+		// fmt.Println(DbErr.Error())
+		if DbErr.Error() == `ERROR: duplicate key value violates unique constraint "emails_pkey" (SQLSTATE 23505)` {
+			respondWithError(w, http.StatusConflict, "Database Issue")
+			return
+		}
 		respondWithError(w, http.StatusInternalServerError, "Database Issue")
 		return
 	}
 	json.NewEncoder(w).Encode(DbData)
+	return
 
 }
 
 func GetPassword(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
 
+	DbEmail, DbEr := dto.GetEmail(params["id"])
+	if DbEr != nil {
+		respondWithError(w, http.StatusInternalServerError, "Database Issue")
+		return
+	}
+
+	respondWithJSON(w, http.StatusOK, DbEmail)
 }
 
 func UpdatePassword(w http.ResponseWriter, r *http.Request) {

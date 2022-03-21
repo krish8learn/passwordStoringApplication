@@ -20,10 +20,21 @@ func CreateEmail(emailId, domainName, password, reason string) (*Emails, error) 
 		Password:   password,
 		Reason:     sql.NullString{String: reason, Valid: true},
 	}
-	DB.Create(&email)
+	result := DB.Create(&email)
 
-	if DB.Error != nil {
-		return nil, DB.Error
+	if result.Error != nil {
+		return nil, result.Error
 	}
+	return &email, nil
+}
+
+func GetEmail(emailId string) (*Emails, error) {
+	var email Emails
+	result := DB.Where("email_id = ?", emailId).First(&email)
+
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
 	return &email, nil
 }

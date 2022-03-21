@@ -18,8 +18,9 @@ func main() {
 	//endpoints
 	log.Println("Server Running")
 	router.HandleFunc("/healthStatus", handlers.HealthStatus).Methods("GET")
+	//email
 	router.HandleFunc("/savePassword", handlers.SavePassword).Methods("POST")
-	router.HandleFunc("/getPassword", handlers.GetPassword).Methods("GET")
+	router.HandleFunc("/getPassword/{id}", handlers.GetPassword).Methods("GET")
 	router.HandleFunc("/updatePassword", handlers.UpdatePassword).Methods("PUT")
 	router.HandleFunc("/removePassword", handlers.RemovePassword).Methods("DELETE")
 	log.Fatalln(http.ListenAndServe(":8080", router))
