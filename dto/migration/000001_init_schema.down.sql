@@ -1,0 +1,3 @@
+DROP TABLE IF EXISTS applications;
+DROP TABLE IF EXISTS browsers;
+DROP TABLE IF EXISTS emails;
