@@ -26,5 +26,10 @@ func main() {
 	router.HandleFunc("/email/updatePassword", handlers.UpdatePassword).Methods("PUT")
 	router.HandleFunc("/email/removePassword/{id}", handlers.RemovePassword).Methods("DELETE")
 	//browser
+	router.HandleFunc("/browser/saveBrowser", handlers.SaveBrowser).Methods("POST")
+	router.HandleFunc("/browser/getAllBrowser", handlers.GetAllBrowsers).Methods("GET")
+	router.HandleFunc("/browser/removeBrowser/{id}", handlers.RemoveBrowser).Methods("DELETE")
+
+	//applications
 	log.Fatalln(http.ListenAndServe(":8080", router))
 }
