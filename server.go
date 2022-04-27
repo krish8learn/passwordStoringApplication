@@ -29,7 +29,11 @@ func main() {
 	router.HandleFunc("/browser/saveBrowser", handlers.SaveBrowser).Methods("POST")
 	router.HandleFunc("/browser/getAllBrowser", handlers.GetAllBrowsers).Methods("GET")
 	router.HandleFunc("/browser/removeBrowser/{id}", handlers.RemoveBrowser).Methods("DELETE")
-
 	//applications
+	router.HandleFunc("/app/saveApp", handlers.SaveApp).Methods("POST")
+	router.HandleFunc("/app/getApp/{id}", handlers.GetAppDetails).Methods("GET")
+	router.HandleFunc("/app/getAllApp", handlers.GetAllApps).Methods("GET")
+	router.HandleFunc("/app/removeApp/{id}", handlers.RemoveApp).Methods("DELETE")
+
 	log.Fatalln(http.ListenAndServe(":8080", router))
 }
