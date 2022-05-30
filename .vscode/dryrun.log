@@ -1,0 +1,12 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/krishnendu/Go/src/github.com/krish8learn/passwordStoringApplication'
+make: Leaving directory '/home/krishnendu/Go/src/github.com/krish8learn/passwordStoringApplication'
+ 
+make: Circular 5434 <- 5434 dependency dropped.
+make: *** No rule to make target '-e', needed by '5434'.
+make: *** No rule to make target 'POSTGRES_USER=root', needed by '5434'.
+make: *** No rule to make target 'POSTGRES_PASSWORD=secret', needed by '5434'.
+make: *** No rule to make target '-d', needed by '5434'.
+make: Circular 5434 <- postgres dependency dropped.
+make: Circular postgres <- postgres dependency dropped.
+

@@ -10,7 +10,7 @@ import (
 
 func LodaEnvVariables() string {
 	//load env files
-	err := godotenv.Load("./config/app.env")
+	err := godotenv.Load("app.env")
 	if err != nil {
 		log.Fatalln("unable to find env files", err)
 	}

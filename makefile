@@ -19,4 +19,10 @@ migratedown:
 genGOStruct:
 		tables-to-go -v -t pg -d password_store_application -h 127.0.0.1 -s public -u root -p krish@knight8 -of ../passwordStoringApplication/dto
 		
+startDB:
+		sudo docker start -a postgres
+
+startApp:
+		sudo docker start --attach passwordapp
+		
 .PHONY: createdb dropdb migrateCreate migrateup migratedown genGOStruct

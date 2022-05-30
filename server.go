@@ -35,5 +35,5 @@ func main() {
 	router.HandleFunc("/app/getAllApp", handlers.GetAllApps).Methods("GET")
 	router.HandleFunc("/app/removeApp/{id}", handlers.RemoveApp).Methods("DELETE")
 
-	log.Fatalln(http.ListenAndServe(":8080", router))
+	log.Fatalln(http.ListenAndServe(":8081", router))
 }
